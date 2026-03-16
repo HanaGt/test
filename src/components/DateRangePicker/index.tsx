@@ -185,7 +185,7 @@ export function DateRangePicker({
           {/* Scrolling Calendars (two months visible, scroll for more) */}
           <div
             ref={scrollContainerRef}
-            className="overflow-y-auto px-4 py-4 h-[540px] max-h-[540px]"
+            className="overflow-y-auto px-4 py-4 h-[300px] sm:h-[540px] max-h-[50vh] sm:max-h-[540px]"
             style={{
               scrollbarWidth: "thin", 
               scrollbarColor: "#CCCCCC transparent", 
