@@ -177,7 +177,7 @@ export function DateRangePicker({
         />
 
         {/* Right Area */}
-        <div className="flex flex-1 flex-col min-w-0 sm:min-w-[320px]">
+        <div className="flex flex-1 flex-col min-w-0 sm:min-w-[256px]">
           <DateDisplayHeader draftRange={draftRange} />
           
           <WeekdayHeader />
@@ -185,7 +185,7 @@ export function DateRangePicker({
           {/* Scrolling Calendars (two months visible, scroll for more) */}
           <div
             ref={scrollContainerRef}
-            className="overflow-y-auto px-6 py-4 h-[540px] max-h-[540px]"
+            className="overflow-y-auto px-4 py-4 h-[540px] max-h-[540px]"
             style={{
               scrollbarWidth: "thin", 
               scrollbarColor: "#CCCCCC transparent", 
