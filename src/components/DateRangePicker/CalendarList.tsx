@@ -63,6 +63,43 @@ export function CalendarList({
     return () => observer.disconnect();
   }, [handleObserver]);
 
+  // Scroll to selected date range when it changes
+  useEffect(() => {
+    if (draftRange.startDate) {
+      const startMonth = new Date(draftRange.startDate.getFullYear(), draftRange.startDate.getMonth(), 1);
+      const firstRenderedMonth = new Date(baseMonth.getFullYear(), baseMonth.getMonth() - monthsBackToLoad, 1);
+      
+      let newMonthsBack = monthsBackToLoad;
+      if (startMonth < firstRenderedMonth) {
+        const monthDiff = (firstRenderedMonth.getFullYear() - startMonth.getFullYear()) * 12 + (firstRenderedMonth.getMonth() - startMonth.getMonth());
+        newMonthsBack = monthsBackToLoad + monthDiff;
+        setMonthsBackToLoad(newMonthsBack);
+      }
+      
+      // Delay to allow render if monthsBackToLoad changed
+      setTimeout(() => {
+        const monthElement = document.getElementById(`month-${startMonth.getFullYear()}-${startMonth.getMonth()}`);
+        if (monthElement && scrollContainerRef.current) {
+          const container = scrollContainerRef.current;
+          
+          const containerTop = container.scrollTop;
+          const containerBottom = containerTop + container.clientHeight;
+          const elemTop = monthElement.offsetTop - container.offsetTop;
+          const elemBottom = elemTop + monthElement.clientHeight;
+          
+          const isVisible = elemTop >= containerTop && elemBottom <= containerBottom;
+          
+          if (!isVisible) {
+            container.scrollTo({
+              top: elemTop,
+              behavior: "smooth"
+            });
+          }
+        }
+      }, 50);
+    }
+  }, [draftRange.startDate, draftRange.endDate, baseMonth, monthsBackToLoad]); // Watch draftRange changes
+
   useEffect(() => {
     if (scrollContainerRef.current && previousScrollHeightRef.current > 0) {
       const container = scrollContainerRef.current;

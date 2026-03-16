@@ -24,8 +24,11 @@ export function MonthView(props: {
       : endDate;
 
   return (
-    <div className="flex flex-col items-center mb-6">
-      <div 
+    <div 
+      id={`month-${month.getFullYear()}-${month.getMonth()}`} 
+      className="flex flex-col items-center mb-6"
+    >
+      <div
         className="flex flex-col gap-2 w-[224px] sm:w-[224px]"
       >
         <div className="text-[14px] font-semibold text-slate-600 text-left pl-2">
@@ -33,8 +36,8 @@ export function MonthView(props: {
         </div>
         <div className="grid grid-cols-7 gap-y-1 text-[13px]">
           {matrix.map((week, weekIndex) => (
-            <div 
-              key={weekIndex} 
+            <div
+              key={weekIndex}
               className="contents"
             >
               {week.map((date, index) => {
@@ -56,28 +59,24 @@ export function MonthView(props: {
                     onMouseEnter={() => onDayHover(date)}
                     onMouseLeave={() => onDayHover(null)}
                   >
-                    {/* Connecting Background */}
                     {showBg && (
                       <div
-                        className={`absolute inset-y-0 bg-[#E9F3FF] ${
-                          inRange
+                        className={`absolute inset-y-0 bg-[#E9F3FF] ${inRange
                             ? "inset-x-0"
                             : isRangeStart
-                            ? "left-1/2 right-0"
-                            : "left-0 right-1/2"
-                        }`}
+                              ? "left-1/2 right-0"
+                              : "left-0 right-1/2"
+                          }`}
                       />
                     )}
-                    {/* Day Circle */}
                     <button
                       type="button"
-                      className={`relative z-10 flex h-[32px] w-[32px] items-center justify-center rounded-full text-[13px] font-medium transition-colors ${
-                        isStart || isEnd
+                      className={`relative z-10 flex h-[32px] w-[32px] items-center justify-center rounded-full text-[13px] font-medium transition-colors ${isStart || isEnd
                           ? "bg-[#3A80D2] text-white"
                           : isCurrentMonth
-                          ? "text-slate-800 hover:bg-slate-100"
-                          : "text-slate-300"
-                      }`}
+                            ? "text-slate-800 hover:bg-slate-100"
+                            : "text-slate-300"
+                        }`}
                     >
                       {date.getDate()}
                     </button>
