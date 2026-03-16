@@ -5,7 +5,8 @@ import { presets } from "./presets";
 export function useDateRangePicker(
   initialStartDate: Date | null,
   initialEndDate: Date | null,
-  onApply?: (range: DateRange, preset?: PresetKey) => void
+  onApply?: (range: DateRange, preset?: PresetKey) => void,
+  onCancel?: () => void
 ) {
   const today = startOfDay(new Date());
 
@@ -69,6 +70,9 @@ export function useDateRangePicker(
 
   const handleCancel = () => {
     setDraftRange(appliedRange);
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   const handlePresetClick = (key: PresetKey) => {

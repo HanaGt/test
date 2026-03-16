@@ -15,12 +15,14 @@ export type DateRangePickerProps = {
   initialStartDate?: Date | null;
   initialEndDate?: Date | null;
   onApply?(range: DateRange, preset?: PresetKey): void;
+  onCancel?(): void;
 };
 
 export function DateRangePicker({
   initialStartDate = null,
   initialEndDate = null,
   onApply,
+  onCancel,
 }: DateRangePickerProps) {
   const {
     draftRange,
@@ -32,7 +34,7 @@ export function DateRangePicker({
     handleApply,
     handleCancel,
     handlePresetClick,
-  } = useDateRangePicker(initialStartDate, initialEndDate, onApply);
+  } = useDateRangePicker(initialStartDate, initialEndDate, onApply, onCancel);
 
   return (
     <div className="flex w-fit max-w-full flex-col overflow-hidden rounded-[16px] border border-slate-200 bg-white shadow-xl">

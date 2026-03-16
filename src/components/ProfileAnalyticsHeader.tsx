@@ -79,6 +79,7 @@ export function ProfileAnalyticsHeader() {
               
               setIsOpen(false);
             }}
+            onCancel={() => setIsOpen(false)}
           />
         </div>
       ) : null}
